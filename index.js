@@ -3,7 +3,7 @@
 
     $("#search-button").on("click", function(){
 
-    var searchValue = $("search-value").val();
+    var searchValue = $("#search-value").val();
     
     $("#search-value").val("");
 //need a variable for a search button
@@ -31,6 +31,8 @@
         var card = $("<div>").addClass("card");
         var wind = $("<p>").addClass("card-text").text(`Wind Speed: ${data.wind.speed}`);
         var humidity = $("<p>").addClass("card-text").text(`Humidity: ${data.main.humidity}`)
+        
+        
         var cardBody = $("<div>").addClass("card-body");
         cardBody.append(title, wind, humidity,)
         card.append(cardBody);
@@ -40,6 +42,21 @@
 
 
     )};
+
+    // function forecastWeather(searchValue) {
+
+    //     $.ajax({
+
+    //         type: "GET",
+    //         url: `api.openweathermap.org/data/2.5/forecast?q=${searchValue}&appid={e8bb5a6ba8f08e6e176eb848cae16ef7}`
+    //         dataType: "json",
+    //     }).then(function(data){
+
+    //         console.log(data)
+
+    //     })
+    // }
+    
 
 //grab a function to get the forcast for the days
     // use a for loop to loop over all forcasts(by specs)
