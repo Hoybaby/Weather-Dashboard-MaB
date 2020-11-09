@@ -1,47 +1,53 @@
 // we need an input form
-$(document).ready(function (){
 
 
-$("#search-button").on("click", function(){
+    $("#search-button").on("click", function(){
 
     var searchValue = $("search-value").val();
     
     $("#search-value").val("");
 //need a variable for a search button
 //going more into ajax call this time
+    searchWeather(searchValue)
+    });
 
-
-function searchWeather(searchVlue) {
+    function searchWeather(searchValue) {
 
     $.ajax({
         type: "GET",
-        url: "http://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=e8bb5a6ba8f08e6e176eb848cae16ef7",
+        url: "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=e8bb5a6ba8f08e6e176eb848cae16ef7&units=imperial",
         // my key "e8bb5a6ba8f08e6e176eb848cae16ef7"
         dataType: "json",
         // success: function
-    }).then(data) {
+    }).then(function(data) {
         console.log(data);
         //create a history link for the search(Look up.push())
 
+        //create a card
 
+        $("#today").empty();
+
+        var title = $("<h3>").addClass ("card-title").text(data.name);
+        var card = $("<div>").addClass("card");
+        var wind = $("<p>").addClass("card-text").text(`Wind Speed: ${data.wind.speed}`);
+        var humidity = $("<p>").addClass("card-text").text(`Humidity: ${data.main.humidity}`)
+        var cardBody = $("<div>").addClass("card-body");
+        cardBody.append(title, wind, humidity,)
+        card.append(cardBody);
+        $("#today").append(card)
     }
 
 
 
-}
+    )};
+
+//grab a function to get the forcast for the days
+    // use a for loop to loop over all forcasts(by specs)
+
+//function to get a uv index( another url call)
 
 
-
-
-})
-
-
-
-
-
-
-
-
+//get a current search history, if there is any, then print it out
 
 
 
@@ -49,4 +55,13 @@ function searchWeather(searchVlue) {
 
 
 
-})
+
+
+
+
+
+
+
+
+
+
