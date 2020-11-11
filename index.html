@@ -19,22 +19,25 @@
         <!-- <h1>Weather Dashboard</h1> -->
 
     </header>
+    
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <aside class="cold-md-3 b-light">
+            <aside class="col-md-3 b-light">
                 <h5> Search for the city</h5>
+                <div class="form-inline form-group">
+                    <input type="text" class="form-control" id="search-value"/>
+                    <button class="btn btn-primary" id="search-button"><i class="fa fa-search"></i></button>
+                </div>
             </aside>
-            <div class="form-inline form-group">
-                <input type="text" class="form-control" id="search-value"/>
-                <button class="btn btn-primary" id="search-button"><i class="fa fa-search"></i></button>
-            </div>
             
         </div>
     </div>
 
-    <div class="container">
+    <div class="container"> 
         <div class="" id="today"></div>
+
+        <div class="" id="forcast"></div>
     </div>
 
 

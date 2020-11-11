@@ -8,7 +8,7 @@
     $("#search-value").val("");
 //need a variable for a search button
 //going more into ajax call this time
-    searchWeather(searchValue)
+    searchWeather(searchValue);
     });
 
     function searchWeather(searchValue) {
@@ -27,36 +27,45 @@
 
         $("#today").empty();
 
-        var title = $("<h3>").addClass ("card-title").text(data.name);
+        var title = $("<h3>").addClass("card-title").text(data.name);
         var card = $("<div>").addClass("card");
+        var temp = $("<p>").addClass("card-text").text(`Temperature : ${data.main.temp}`);
         var wind = $("<p>").addClass("card-text").text(`Wind Speed: ${data.wind.speed}`);
-        var humidity = $("<p>").addClass("card-text").text(`Humidity: ${data.main.humidity}`)
+        var humidity = $("<p>").addClass("card-text").text(`Humidity: ${data.main.humidity}`);
         
         
         var cardBody = $("<div>").addClass("card-body");
-        cardBody.append(title, wind, humidity,)
+        cardBody.append(title, wind, humidity,temp)
         card.append(cardBody);
-        $("#today").append(card)
-    }
-
-
-
+        $("#today").append(card);
+        forecastWeather(searchValue);
+        }
     )};
 
-    // function forecastWeather(searchValue) {
+    function forecastWeather(searchValue) {
 
-    //     $.ajax({
+        $.ajax({
 
-    //         type: "GET",
-    //         url: `api.openweathermap.org/data/2.5/forecast?q=${searchValue}&appid={e8bb5a6ba8f08e6e176eb848cae16ef7}`
-    //         dataType: "json",
-    //     }).then(function(data){
+            type: "GET",
+            url: `http://api.openweathermap.org/data/2.5/forecast?q=${searchValue}&appid=b0d55d94d45640643224cf884f17469a&units=imperial`,
+            dataType: "json",
+        }).then(function(response){
+            console.log(response)
+            var title = $("<h5>").addClass("card-ttle").text(response.name);
+            var card = $("<div>").addClass("card");
+            var temp = $("<p>").addClass("card-text").text(`Temperature : ${response.list[0].main.temp}`);
+            var wind = $("<p>").addClass("card-text").text(`Wind Speed: ${response.list[0].wind.speed}`);
+            var humidity = $("<p>").addClass("card-text").text(`Humidity: ${response.list[0].main.humidity}`);
 
-    //         console.log(data)
+            var cardBody = $("<div").addClass("card-body");
+            cardBody.append(title, temp, wind, humidity);
+            card.append(cardBody);
+            $("#forecast").append(card);
 
-    //     })
-    // }
+        })
+    }
     
+
 
 //grab a function to get the forcast for the days
     // use a for loop to loop over all forcasts(by specs)
