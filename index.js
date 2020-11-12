@@ -61,13 +61,13 @@
             // console.log(data.city.name);   
             var title = $("<h5>").addClass("card-title").text(data.list[i].dt_txt);
             var card = $("<div>").addClass("card col-md-2 fiveDay");
-            var icon = `<img src="http://openweathermap.org/img/wn/${data.list[i].weather[i].icon}.png">`;
+            var icon = `<img src="http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}.png">`;
             var temp = $("<p>").addClass("card-text").text(`Temperature : ${data.list[i].main.temp}`);
             var wind = $("<p>").addClass("card-text").text(`Wind Speed: ${data.list[i].wind.speed}`);
             var humidity = $("<p>").addClass("card-text").text(`Humidity: ${data.list[i].main.humidity}`);
 
             var cardBody = $("<div>").addClass("card-body");
-            cardBody.append(title, icon, temp, wind, humidity);
+            cardBody.append(title,icon, temp, wind, humidity);
             card.append(cardBody);
             console.log(1);
             // console.log(card)
@@ -79,7 +79,7 @@
         })
     }
     
-    list[0].weather[0].icon
+
     function searchUV (){
 
         $.ajax({
