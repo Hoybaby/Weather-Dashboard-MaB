@@ -1,10 +1,34 @@
 // we need an input form
+  var citiesArray = [];
 
+function renderButtons() {
+
+    $("#city-view").empty();
+
+    for (var i= 0; i < citiesArray.length; i++) {
+        var cityBtn = $("<button>");
+
+        cityBtn.addClass("city-btn");
+
+        cityBtn.attr("data-name", citiesArray[i]);
+
+        cityBtn.text(citiesArray[i]);
+
+        $("#city-view").append(cityBtn);
+    }
+
+}
 
     $("#search-button").on("click", function(){
 
     var searchValue = $("#search-value").val();
-    
+
+    citiesArray.push(searchValue);
+
+    renderButtons();
+    // localStorage.setItem("citySearch",searchValue);
+    // localStorage.getItem()
+
     $("#search-value").val("");
 //need a variable for a search button
 //going more into ajax call this time
@@ -30,6 +54,7 @@
         //create a card
 
         $("#today").empty();
+        
 
         var title = $("<h3>").addClass("card-title").text(data.name);
         var card = $("<div>").addClass("card col-md-10");
@@ -56,6 +81,8 @@
         }).then(function(data){
             console.log(data);
             // console.log(data.list.length);
+
+            $("#forecast").empty();
 
             for (var i = 0; i < data.list.length; i+=8){
             // console.log(data.city.name);   
@@ -93,12 +120,15 @@
         latitude= data.coord.lat;
         longitude= data.coord.lon;
 
-        var uvIndex = $("<p>").addClass("card-text").text("UV index: ")
+        var uvIndex = $("<p>").addClass("card-text").text(`UV index: " + ${data.value}`);
+        card.append(uvIndex);
+
         })
-
-        
-
     }
+
+    $(document).on("click", ".city-btn", searchWeather,forecastWeather);
+
+    renderButtons();
 // for storage idea. could do a modal counter cliker/something like this or how many times. 
 
 //grab a function to get the forcast for the days
@@ -109,7 +139,14 @@
 
 //get a current search history, if there is any, then print it out
 
-
+//we need to new array to store into the local storage
+//we need to push the search value into that array
+//we need to grab that value and place it into localstorage
+//the alues are json. stringify the cities
+// window.localStorage.setItem("cites", CitiesArray)
+//when we click the button that we created, we want to put that value from that array IN LOCAL storage to that button so it works with the API
+//cities = json.parse(getItem("cities")
+// then a for loops
 
 
 
