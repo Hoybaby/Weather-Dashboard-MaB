@@ -32,7 +32,7 @@
         $("#today").empty();
 
         var title = $("<h3>").addClass("card-title").text(data.name);
-        var card = $("<div>").addClass("card");
+        var card = $("<div>").addClass("card col-md-10");
         var temp = $("<p>").addClass("card-text").text(`Temperature : ${data.main.temp}`);
         var wind = $("<p>").addClass("card-text").text(`Wind Speed: ${data.wind.speed}`);
         var humidity = $("<p>").addClass("card-text").text(`Humidity: ${data.main.humidity}`);
