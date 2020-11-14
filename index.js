@@ -16,14 +16,17 @@ function renderButtons() {
 
         $("#city-view").append(cityBtn);
     }
-
 }
 
     $("#search-button").on("click", function(){
 
     var searchValue = $("#search-value").val();
-
+    
+    citiesArray = JSON.parse(localStorage.getItem("citiesArray")) || [];
+    
     citiesArray.push(searchValue);
+
+    localStorage.setItem("citiesArray", JSON.stringify(citiesArray));
 
     renderButtons();
     // localStorage.setItem("citySearch",searchValue);
