@@ -34,6 +34,7 @@ function renderButtons() {
 //going more into ajax call this time
     searchWeather(searchValue);
     forecastWeather(searchValue);
+    searchUV();
     });
 
     var latitude = "";
@@ -121,8 +122,22 @@ function renderButtons() {
         longitude= data.coord.lon;
 
         var uvIndex = $("<p>").addClass("card-text").text(`UV index: " + ${data.value}`);
-        card.append(uvIndex);
+        var button = $("<button>").addClass("btn uvIndex");
+        button.append(uvIndex);
 
+        if (data.value < 3) {
+            $(".uIndex").addClass("low");
+        }
+        else if (data.value <= 6) {
+            $(".uIndex").addClass("moderate");
+        }
+        else if (data.value < 8) {
+            $(".uIndex").addClass("high");
+        }
+        else if (data.value > 11) {
+            $(".uIndex").addClass("veryHigh");
+        }
+        
         })
     }
 
