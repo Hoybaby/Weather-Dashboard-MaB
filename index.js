@@ -147,18 +147,15 @@ renderButtons();
         $(".uv").append(button);
 
         if (data.value < 3) {
-            $(".uIndex").addClass("low");
+            $(".uvIndex").addClass("low");
         }
         else if (data.value <= 6) {
-            $(".uIndex").addClass("moderate");
+            $(".uvIndex").addClass("high");
         }
-        else if (data.value < 8) {
-            $(".uIndex").addClass("high");
+        else if (data.value > 8) {
+            $(".uvIndex").addClass("veryHigh");
         }
-        else if (data.value > 11) {
-            $(".uIndex").addClass("veryHigh");
-        }
-        
+      
         })
     }
 
