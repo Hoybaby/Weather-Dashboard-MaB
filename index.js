@@ -1,23 +1,36 @@
 // we need an input form
-  var citiesArray = [];
+var citiesArray = [];
 
 function renderButtons() {
-
+    
     $("#city-view").empty();
 
-    for (var i= 0; i < citiesArray.length; i++) {
-        var cityBtn = $("<button>");
+    var citiesStorage = JSON.parse(localStorage.getItem("citiesArray")) || [];
 
-        cityBtn.addClass("city-btn");
+    for(var i= 0; i < citiesArray.length; i++) {
 
-        cityBtn.attr("data-name", citiesArray[i]);
+        var grabCity = citiesStorage[i];
 
-        cityBtn.text(citiesArray[i]);
-
-        $("#city-view").append(cityBtn);
+        $("#city-vew").append("<div class = 'list-group'>"
+        + "<button class='list-group'" + grabCity
+        + "</button>")
     }
 }
+renderButtons();
+    // for (var i= 0; i < citiesArray.length; i++) {
+    //     var cityBtn = $("<button>");
 
+    //     cityBtn.addClass("city-btn");
+
+    //     cityBtn.attr("data-name", citiesArray[i]);
+
+    //     cityBtn.text(citiesArray[i]);
+
+    //     $("#city-view").append(cityBtn);
+    // }
+// }
+
+//EVENT LISTENER for SEARCH
     $("#search-button").on("click", function(){
 
     var searchValue = $("#search-value").val();
@@ -37,7 +50,7 @@ function renderButtons() {
 //going more into ajax call this time
     searchWeather(searchValue);
     forecastWeather(searchValue);
-    searchUV();
+   
     });
 
     var latitude = "";
@@ -54,7 +67,8 @@ function renderButtons() {
     }).then(function(data) {
         console.log(data);
         //create a history link for the search(Look up.push())
-
+        lat= data.coord.lat;
+        lon= data.coord.lon;
         //create a card
 
         $("#today").empty();
@@ -67,13 +81,16 @@ function renderButtons() {
         var humidity = $("<p>").addClass("card-text").text(`Humidity: ${data.main.humidity}`);
         
         
-        var cardBody = $("<div>").addClass("card-body");
+        var cardBody = $("<div>").addClass("card-body uv");
         cardBody.append(title, wind, humidity,temp)
         card.append(cardBody);
         $("#today").append(card);
+        searchUV();
         // forecastWeather(searchValue);
+        
         }
-    )};
+    // searchUV()
+    )}; ;
 
     function forecastWeather(searchValue) {
 // a loop must be used to fetch the five day forecast with the openweather api
@@ -115,18 +132,19 @@ function renderButtons() {
 
         $.ajax({
 
-           
+      
             // my key: "b0d55d94d45640643224cf884f17469a"
             type: "GET",
             url: `http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=b0d55d94d45640643224cf884f17469a&units=imperial`
         }).then(function(data){
         console.log(data);
-        latitude= data.coord.lat;
-        longitude= data.coord.lon;
+        // lat= data.coord.lat;
+        // lon= data.coord.lon;
 
-        var uvIndex = $("<p>").addClass("card-text").text(`UV index: " + ${data.value}`);
+        var uvIndex = $("<p>").addClass("card-text").text(`UV index: ${data.value}`);
         var button = $("<button>").addClass("btn uvIndex");
         button.append(uvIndex);
+        $(".uv").append(button);
 
         if (data.value < 3) {
             $(".uIndex").addClass("low");
@@ -146,7 +164,6 @@ function renderButtons() {
 
     $(document).on("click", ".city-btn", searchWeather,forecastWeather);
 
-    renderButtons();
 // for storage idea. could do a modal counter cliker/something like this or how many times. 
 
 //grab a function to get the forcast for the days
