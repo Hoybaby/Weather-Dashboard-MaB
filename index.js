@@ -52,6 +52,7 @@ $(".list-group").on("click", ".list-btn", function(event) {
 
 //EVENT LISTENER for SEARCH
     $("#search-button").on("click", function(){
+   
 
     var searchValue = $("#search-value").val();
     
@@ -123,7 +124,7 @@ $(".list-group").on("click", ".list-btn", function(event) {
             console.log(data);
             // console.log(data.list.length);
 
-            $("#forecast").empty();
+            // $("#forecast").empty();
 
             for (var i = 0; i < data.list.length; i+=8){
             // console.log(data.city.name);   
@@ -139,7 +140,7 @@ $(".list-group").on("click", ".list-btn", function(event) {
             card.append(cardBody);
             console.log(1);
             // console.log(card)
-            $("#forecast").append(card);
+            $("#today").append(card);
             //get the 5-day weather data
             //confirm you can modify content in the modal via css selector
             //format the data inside the modal from previod psuedocdoe
@@ -179,9 +180,12 @@ $(".list-group").on("click", ".list-btn", function(event) {
         })
     }
 
-    $(document).on("click", ".city-btn", searchWeather,forecastWeather);
+    // $(document).on("click", ".city-btn", searchWeather,forecastWeather);
 
-    $("#clear-button")
+    $("#clear-button").on("click",function() {
+        localStorage.clear();
+    });
+    // })
 
 // for storage idea. could do a modal counter cliker/something like this or how many times. 
 
