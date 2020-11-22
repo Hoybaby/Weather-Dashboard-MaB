@@ -1,22 +1,31 @@
 // we need an input form
-var citiesArray = [];
+// var citiesArray = [];
 
 function renderButtons() {
     
-    $("#city-view").empty();
+    $("#city-list").empty();
 
     var citiesStorage = JSON.parse(localStorage.getItem("citiesArray")) || [];
 
-    for(var i= 0; i < citiesArray.length; i++) {
+    for(var i= 0; i < citiesStorage.length; i++) {
 
         var grabCity = citiesStorage[i];
 
-        $("#city-vew").append("<div class = 'list-group'>"
-        + "<button class='list-group'" + grabCity
-        + "</button>")
+        const searchedCity = document.createElement("input");
+
+        searchedCity.setAttribute("type", "text");
+        searchedCity.setAttribute("readonly", true);
+        searchedCity.setAttribute("class", "form-control d-block bg-primary text-white");
+        searchedCity.setAttribute("value", grabCity);
+        searchedCity.addEventListener("click", function() {
+            searchWeather(searchedCity.value);
+            fiveDay(searchedCity.value);
+        })
+        // $("#city-list").append("<div class ='list-group'>"
+        // + "<button class='list-btn'" + grabCity
+        // + "</button>")
+        $("#city-list").append(searchedCity);
     }
-}
-renderButtons();
     // for (var i= 0; i < citiesArray.length; i++) {
     //     var cityBtn = $("<button>");
 
@@ -28,7 +37,18 @@ renderButtons();
 
     //     $("#city-view").append(cityBtn);
     // }
-// }
+
+// renderButtons();
+}
+
+
+$(".list-group").on("click", ".list-btn", function(event) {
+    event.preventDefault();
+
+    var cityList = ($(this).text());
+
+    searchWeather(cityList);
+})
 
 //EVENT LISTENER for SEARCH
     $("#search-button").on("click", function(){
@@ -41,7 +61,7 @@ renderButtons();
 
     localStorage.setItem("citiesArray", JSON.stringify(citiesArray));
 
-    renderButtons();
+    // renderButtons();
     // localStorage.setItem("citySearch",searchValue);
     // localStorage.getItem()
 
@@ -49,8 +69,8 @@ renderButtons();
 //need a variable for a search button
 //going more into ajax call this time
     searchWeather(searchValue);
-    forecastWeather(searchValue);
-   
+    // forecastWeather(searchValue);
+    renderButtons();
     });
 
     var latitude = "";
@@ -86,7 +106,7 @@ renderButtons();
         card.append(cardBody);
         $("#today").append(card);
         searchUV();
-        // forecastWeather(searchValue);
+        forecastWeather(searchValue);
         
         }
     // searchUV()
@@ -160,6 +180,8 @@ renderButtons();
     }
 
     $(document).on("click", ".city-btn", searchWeather,forecastWeather);
+
+    $("#clear-button")
 
 // for storage idea. could do a modal counter cliker/something like this or how many times. 
 
