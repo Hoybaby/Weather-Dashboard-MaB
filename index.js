@@ -118,7 +118,7 @@ $(".list-group").on("click", ".list-btn", function(event) {
         $.ajax({
 
             type: "GET",
-            url: `http://api.openweathermap.org/data/2.5/forecast?q=${searchValue}&appid=b0d55d94d45640643224cf884f17469a&units=imperial`,
+            url: `https://api.openweathermap.org/data/2.5/forecast?q=${searchValue}&appid=b0d55d94d45640643224cf884f17469a&units=imperial`,
             dataType: "json",
         }).then(function(data){
             console.log(data);
@@ -130,7 +130,7 @@ $(".list-group").on("click", ".list-btn", function(event) {
             // console.log(data.city.name);   
             var title = $("<h5>").addClass("card-title").text(data.list[i].dt_txt);
             var card = $("<div>").addClass("card col-md-2 fiveDay");
-            var icon = `<img src="http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}.png">`;
+            var icon = `<img src="https://openweathermap.org/img/wn/${data.list[i].weather[0].icon}.png">`;
             var temp = $("<p>").addClass("card-text").text(`Temperature : ${data.list[i].main.temp}`);
             var wind = $("<p>").addClass("card-text").text(`Wind Speed: ${data.list[i].wind.speed}`);
             var humidity = $("<p>").addClass("card-text").text(`Humidity: ${data.list[i].main.humidity}`);
@@ -156,7 +156,7 @@ $(".list-group").on("click", ".list-btn", function(event) {
       
             // my key: "b0d55d94d45640643224cf884f17469a"
             type: "GET",
-            url: `http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=b0d55d94d45640643224cf884f17469a&units=imperial`
+            url: `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=b0d55d94d45640643224cf884f17469a&units=imperial`
         }).then(function(data){
         console.log(data);
         // lat= data.coord.lat;
