@@ -4,6 +4,9 @@
     <p>Developers are often tasked to obtain data from a API. They need to properly
     perform aJax calls and use the APIs correctly. Calling API's information is very important in the work field</p>
     <p> It is very important to find a good api that has good documentation. If there is problems that occur with the API, it can be difficult for the team to figure out the problem without good and clear documentation.
+    
+<h3> Deployable link below </h3>
+    https://hoybaby.github.io/Weather-Dashboard-MaB/
 
 <h3>Step by StepProcess</h3>
     <ol>
