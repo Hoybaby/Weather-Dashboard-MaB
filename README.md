@@ -36,5 +36,3 @@
         <li>Dimitar M (classmate)</li>
     </ul>
 
-
-<h3>Image</h3>
