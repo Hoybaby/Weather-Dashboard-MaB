@@ -14,9 +14,10 @@
         <li>This information can be put into paragraph tags then appended to the card we created.</li>
         <li>Once the single day forecast, was done, the same process would take place for the 5 day forcast and UV index.</li>
         <li>The next thing was local storage which means we have to store when the cities were search by inputing the search value into an array then later getting that name with a getItem and place it into a button.</li>
-        <li></li>
-        <li></li>
     </ol>
+    
+   <h3> Pictures of Application </h3>
+   
 
 <h3>Contributors</h3>
     <ul>
